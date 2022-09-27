@@ -18,7 +18,7 @@ export default function Router() {
         path="/register"
         element={
           token ? (
-            <Navigate to={'/'} replace />
+            <Navigate to={'/home'} replace />
           ) : (
             <Register />
           )
@@ -27,11 +27,15 @@ export default function Router() {
       <Route
         path="/login"
         element={
-          token ? <Navigate to={'/'} replace /> : <Login />
+          token ? (
+            <Navigate to={'/home'} replace />
+          ) : (
+            <Login />
+          )
         }
       />
       <Route
-        path="/"
+        path="/home"
         element={
           token ? (
             <Home />

@@ -4,12 +4,14 @@ import {
   Heading,
   Text,
 } from '@chakra-ui/react';
+import { useCallback } from 'react';
 import {
   FaPen,
   FaPlus,
   FaTrash,
   FaUserCircle,
 } from 'react-icons/fa';
+import Card from '../../Components/Cards/cards';
 import { useAuth } from '../../contexts/authContext';
 
 interface Contact {
@@ -21,7 +23,26 @@ interface Contact {
 }
 
 function Home(): JSX.Element {
-  const { user, signOff } = useAuth();
+  const { user, signOff, token } = useAuth();
+
+  // const getInfos = useCallback(
+  //   async (token: string) => {
+  //     const responseContacts = await api.get(
+  //       'contact/',
+  //       config,
+  //     );
+  //     const { data } = responseContacts;
+  //     localStorage.setItem(
+  //       '@teste:contacts',
+  //       JSON.stringify(data),
+  //     );
+  //     localStorage.setItem(
+  //       '@teste:user',
+  //       JSON.stringify(user),
+  //     );
+  //   },
+  //   [data.token],
+  // );
 
   return (
     <Flex
@@ -68,39 +89,19 @@ function Home(): JSX.Element {
         justifyContent={'flex-start'}
         alignItems={'center'}
       >
-        {user.contacts.map(
+        {user.contacts &&
+          user.contacts.map(
           (contact: Contact, index: any) => (
-            <Flex
-              key={index}
-              flexDirection={'row'}
-              width={'200px'}
-              alignItems={'center'}
-              justifyContent={'space-between'}
-              padding={'2'}
-              bgColor={'gray.600'}
-              color={'white'}
-              borderRadius={'20'}
-              boxShadow={
-                '0px 10px 13px -7px #000000, 3px 25px 15px 3px rgba(0,0,0,0)'
-              }
-              mt={'5'}
-              ml={'3'}
-            >
-              <FaUserCircle size={'55'} />
-              <Flex
-                alignItems={'center'}
-                flexDirection={'column'}
-                w={'70%'}
-              >
-                <Heading as={'h3'}>
-                  {contact.fullName}
-                </Heading>
-                <Text>{contact.email}</Text>
-                <Text>{contact.cellphone}</Text>
-              </Flex>
-            </Flex>
-          ),
-        )}
+            <Card contact={contact} index={index}></Card>
+            )
+          )
+          // :
+          // <Flex>
+          //   <Text>Você ainda não criou nada, vamos criar?</Text>
+          // </Flex>
+        }
+        {/* {!user.contacts && 
+        } */}
       </Flex>
     </Flex>
   );

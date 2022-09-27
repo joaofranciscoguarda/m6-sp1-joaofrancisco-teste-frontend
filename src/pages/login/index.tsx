@@ -102,6 +102,10 @@ function Login(): JSX.Element {
             Suas listas de contato em apenas um só lugar
             Flexivel e atrativo de gerenciar
           </Text>
+          <Text fontSize={'1.1rem'} color={'white'}>
+            App não abrirá após 28 de novembro, quando o
+            Heroku fechar o plano gratis.
+          </Text>
         </Grid>
         <Grid
           as={'form'}
